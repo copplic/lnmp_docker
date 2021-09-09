@@ -1,9 +1,3 @@
-### 准备 
-
-* [Docker CE](https://github.com/yeasy/docker_practice/tree/master/install)
-* Linux （仅在 Centos 7.7 中测试，其他系统及版本有待测试）
-
-### 说明
 
 #### 安装内容：
 
@@ -33,15 +27,13 @@ docker-lnmp
 
 ### 安装
 
-> 开始在本地的虚拟机中安装，由于镜像问题，一直超时安装不成功，换成阿里云镜像中，虽然快了一些，但还是一直超时，最后直接在阿里云服务器上安装成功，建议使用云服务器安装，省心^_^。
 
 ```shell
-$ git clone https://github.com/vvk/docker-lnmp.git
+$ git clone ...
 $ cd docker-lnmp
 $ docker-compose up -d
 Creating docker-lnmp_mysql_1 ... done
 Creating docker-lnmp_php_1   ... done
-Creating composer             ... done
 Creating docker-lnmp_nginx_1 ... done
 ```
 
@@ -76,14 +68,5 @@ this is index.html.
 
 可以使用如下命令创建 `Laravel` 项目：
 
-```shell
-docker run -it -v $PWD:/app composer:2.0 composer create-project --prefer-dist laravel/laravel:~6 blog -vvv
-```
-
-上面命令执行完以后，会在目录 `$PWD/blog` 创建 `Laravel` 项目，可以通过 `ip/blog/public` 在浏览器中正常访问。也可以修改 `$PWD/nginx/conf/default.conf` 配置文件或在 `$PWD/nginx/conf` 目录中添加 `nginx` 配置文件，让域名指向 `laravel` 根目录，以便可以直接通过域名访问 `laravel` 项目。
-
 ### 参考 资料
-
-* [从入门到实践](https://yeasy.gitbook.io/docker_practice/)
-* [LNMP Docker](https://github.com/khs1994-docker/lnmp/blob/master/README.cn.md)
 * [PHP Docker Official Images](https://hub.docker.com/_/php?tab=description)
