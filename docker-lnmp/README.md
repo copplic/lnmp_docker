@@ -62,11 +62,6 @@ this is index.html.
 ```
 
 * 测试 `php` 文件是否可以正常执行：在浏览器中输入 `ip/p.php`，如果可正常显示phpinfo页面，则表面 `php` 文件可正常执行。
-* 测试 `php` 是否可以正常连接 `mysql`：在浏览器中输入 `ip/db.php`，如果显示连接成功，则 `php` 可以正常连接 `mysql`。
-
-### Laravel 开发
-
-可以使用如下命令创建 `Laravel` 项目：
 
 ### 参考 资料
 * [PHP Docker Official Images](https://hub.docker.com/_/php?tab=description)
