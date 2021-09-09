@@ -1,0 +1,55 @@
+version: "3"
+
+services:
+  mysql:
+    hostname: mysql
+    restart: always
+    image: mysql:8.0
+    ports:
+      - "3308:3306"
+    volumes:
+#      - ${PWD}/mysql/conf:/etc/mysql
+      - ${PWD}/mysql/log:/var/log/mysql
+      - ${PWD}/mysql/data:/var/lib/mysql
+#      - ${PWD}/mysql/init:/var/lib//docker-entrypoint-initdb.d/ #初始化文件
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user123456
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci  
+  php:
+    hostname: php
+    container_name: php
+    restart: always
+    build:
+      context: ${PWD}/php
+      dockerfile: Dockerfile
+    ports:
+      - "9001:9000"
+    volumes:
+      - ${PWD}/html:/var/www/html
+      - ${PWD}/php/etc:/usr/local/etc
+  nginx:
+    hostname: nginx
+    restart: always
+    image: nginx:1.19.2-alpine
+    depends_on:     #依赖关系，需要先运行php
+      - "php"
+    ports:
+      - "8080:80"
+    volumes:
+      - ${PWD}/nginx/conf.d:/etc/nginx/conf.d
+      - ${PWD}/nginx/log:/var/log/nginx
+      - ${PWD}/html:/usr/share/nginx/html
+  redis:
+    image: redis:6.2-alpine
+    hostname: redis
+    ports:
+      - "6381:6379"
+    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes:
+      - ${PWD}/redis/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ${PWD}/redis/data:/data
+    restart: always
+    container_name: redis
+
